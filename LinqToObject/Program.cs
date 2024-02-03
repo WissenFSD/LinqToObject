@@ -4,6 +4,23 @@
     {
         static void Main(string[] args)
         {
+
+
+            // Linq : bir sorgulama dilidir.
+
+            // Hem veri tabanı hemde c#içerisindeki veri tutan koleksiyon dizi gibi nesnelerin içerisindeki verileri sorgulayabilirsiniz.
+
+            // Avantajlar
+
+            // Sorgularımızı yazarken bize hız kazandırabilir
+
+            // Kodlar bir arada durduğu için okunabilirlik artıyor
+
+            // Linq teknolojisi c# 3.0 ile birlikte hayatımıza girdi.
+
+
+
+            // Linq sorguları yazma çeşidinize gre performans artabilir yada azabilir.
             List<Student> stu = new List<Student>();
             stu.Add(new Student()
             {
@@ -13,7 +30,7 @@
             });
             stu.Add(new Student()
             {
-                Age = 12,
+                Age = 15,
                 Name = "Oğuzhan",
                 Surname = "Dinç"
             });
@@ -32,7 +49,7 @@
             stu.Add(new Student()
             {
                 Age = 11,
-                Name = "Deniz",
+                Name = "Yaşar",
                 Surname = "Görmüş"
             });
 
@@ -123,11 +140,36 @@
             // soru : iki yada daha çok metodu peşpeşe kullanabilir miyiz ?
 
             // önce filtreleme sonra take metodu sonrasında select metodu kullanıldı
-          var student11=  stu.Where(s => s.Age == 15).Take(1).Select(m => new
+            var student11 = stu.Where(s => s.Age == 15).Take(1).Select(m => new
             {
                 Ad = m.Name
 
             });
+
+
+
+            // group by
+
+            var student12 = stu.GroupBy(s => s.Age).Select(m => new
+            {
+                Age = m.Key,
+                Count = m.Count(s => s.Age>0)
+            });
+
+
+            var student15 = stu.GroupBy(s => s.Name).Select(m => new
+            {
+
+                Name = m.Key,
+                Count=m.Count(s=>s.Age>0)
+
+            });
+
+            // Sum
+
+            var student13 = stu.Sum(s => s.Age);
+
+            var student14 = stu.Count(s => s.Age > 0);
 
         }
         static Student GetStudentByName(List<Student> stu, string name)

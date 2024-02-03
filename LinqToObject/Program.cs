@@ -106,10 +106,28 @@
 
 
             // OrderBy metodu aldığı parametreye göre düzden sıralama yapar(metinsel ifadelerde alfabetik sıralama yapar)
-           var student8= stu.OrderBy(s => s.Name);
+            var student8 = stu.OrderBy(s => s.Name);
 
 
-           var student9= stu.OrderBy(x=>x.Name).Skip(2);
+            // Skip metodu, liste içerisinde aldığı değer kadar üyeyi atlamak için kullanılır
+
+            // Örnek : 5 elemanlı bir listeye skip(2) kullanırsak listedeki ilk 2 üye atlanır ve yok sayılır
+            var student9 = stu.Skip(2);
+
+
+
+            // ToArray metodu, koleksiyonu diziye çevirmek için kullanılır
+            Student[] student10 = stu.ToArray();
+
+
+            // soru : iki yada daha çok metodu peşpeşe kullanabilir miyiz ?
+
+            // önce filtreleme sonra take metodu sonrasında select metodu kullanıldı
+          var student11=  stu.Where(s => s.Age == 15).Take(1).Select(m => new
+            {
+                Ad = m.Name
+
+            });
 
         }
         static Student GetStudentByName(List<Student> stu, string name)
